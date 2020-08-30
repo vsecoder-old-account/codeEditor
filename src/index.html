@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Редактор</title>
+    <link rel="icon" href="img/icon.png">
+    <link rel="stylesheet" href="dist/codemirror.css">
+    <script src="dist/codemirror.js"></script>
+    <script src="dist/xml.js"></script>
+  </head>
+  <style>
+    * {box-sizing: border-box;}
+    body {
+      background: rgb(93, 93, 153);
+      overflow: hidden;
+    }
+    browser, textarea {
+      width: 49%;
+      margin: 0 auto;
+      display: inline-block;
+      height: 500px;
+      margin-left: 100px;
+    }
+    button {
+      display: block;
+    }
+    button {
+      font-weight: 700;
+      color: white;
+      text-decoration: none;
+      padding: .8em 1em calc(.8em + 3px);
+      border-radius: 3px;
+      background: rgb(64,199,129);
+      box-shadow: 0 -3px rgb(53,167,110) inset;
+      transition: 0.2s;
+    } 
+    button:hover { background: rgb(53, 167, 110); }
+    button:active {
+      background: rgb(33,147,90);
+      box-shadow: 0 3px rgb(33,147,90) inset;
+    }
+    browser {
+      background-color: white;
+      position: absolute;
+      margin-left: 10px;
+    }
+  </style>
+  <body>
+    <button class="run" id="run" onclick="runing()">ЗАПУСК</button>
+    <button onclick="download()" style="position: fixed;top: 5px;right: 5px;">СКАЧАТЬ</button>
+    <textarea id="code" name="code" class="longread">
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Документ</title>
+<style></style>
+</head>
+<body>
+  <h1>Новый редактор</h1>
+</body>
+</html></textarea>
+  <browser id="play">
+    <h2 style="text-align: center;">Запустите код</h2>
+  </browser>
+  <script>
+    CodeMirror.fromTextArea(document.getElementById('code'), { mode: 'xml', lineNumbers: false })
+    var code = document.querySelector(".CodeMirror-code");
+    var run = document.getElementById("run");
+    var play = document.getElementById("play");
+    var coding = code.innerText;
+    function runing () {
+      coding = code.innerText;
+      document.getElementById('play').innerHTML = coding;
+    }
+    const download = () => {
+      let text = document.querySelector(".CodeMirror-code").innerText + "\n<!--//vsevolodhtml-->"
+      let blob = new Blob([text], {
+        type: 'text/plain'
+      })
+      let anchor = document.createElement('a')
+      anchor.download = 'project.html'
+      anchor.href = window.URL.createObjectURL(blob)
+      anchor.target = '_blank'
+      anchor.style.display = 'none'
+      document.body.appendChild(anchor)
+      anchor.click()
+      document.body.removeChild(anchor)
+      alert("Код скачивается...")
+    }
+  </script>
+  <style>.CodeMirror, .cm-s-default {width: 49%;display: inline-block;height: 500px;}</style>
+  </body>
+</html>
