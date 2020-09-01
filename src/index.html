@@ -44,6 +44,7 @@
       position: absolute;
       margin-left: 10px;
       overflow: auto;
+      resize: both;
     }
     .start {text-align: center;margin-top: 10%}
     .menu {font-size: 30px;background: #42433E;color: white;}
@@ -62,6 +63,18 @@
     }
     .loc {
       margin-top: -10px;
+    }
+    .reload123 {
+      width: 25px;
+      filter: invert(1);
+      top: 2px;
+      left: 90%;
+      position: absolute;
+      transition: 1s;
+      cursor: pointer;
+    }
+    .reload123:active {
+      transform: rotate(-360deg);
     }
   </style>
   <body>
@@ -85,6 +98,7 @@
       <b class="btest"><</b>
       <b class="btest">></b>
       <mtxt><b class="loc">localhost:1500</b></mtxt>
+      <img src="img/reload.png" class="reload123" onclick="runing()">
     </div>
     <browser id="play">
       <div class="start">
