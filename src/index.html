@@ -65,7 +65,7 @@
     }
   </style>
   <body>
-    <button class="run" id="run" onclick="runing()">ЗАПУСК</button>
+    <button class="run" id="run" onclick="runing()" style="margin-bottom: 2px;margin-top: -2px;margin-left: -4px;">ЗАПУСК</button>
     <button onclick="download()" style="position: fixed;top: 5px;right: 5px;" class="run">СКАЧАТЬ</button>
     <textarea id="code" name="code">
 <!DOCTYPE html>
@@ -99,6 +99,7 @@
     var run = document.getElementById("run");
     var play = document.getElementById("play");
     var coding = code.innerText;
+    console.log("Ctrl + P -- запустить код;\nCtrl + S -- скачать html файл;");
     function runing () {
       coding = code.innerText;
       document.getElementById('play').innerHTML = coding;
@@ -121,7 +122,9 @@
     document.addEventListener('keydown', function(event) {
       if (event.code == 'KeyS' && (event.ctrlKey || event.metaKey)) {
         download();
-      } else (event.code == 'KeyP' && (event.ctrlKey || event.metaKey))
+      } else if (event.code == 'KeyP' && (event.ctrlKey || event.metaKey)) {
+        runing();
+      }
     });
   </script>
   <style>.CodeMirror, .cm-s-default {width: 49%;display: inline-block;height: 500px;}</style>
