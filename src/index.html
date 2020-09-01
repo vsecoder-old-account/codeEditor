@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Редактор</title>
-    <link rel="icon" href="img/icon.png">
+    <link rel="icon" href="../img/icon.png">
     <link rel="stylesheet" href="dist/codemirror.css">
     <script src="dist/codemirror.js"></script>
     <script src="dist/xml.js"></script>
@@ -11,44 +11,63 @@
   <style>
     * {box-sizing: border-box;}
     body {
-      background: rgb(93, 93, 153);
+      background: #282923;
       overflow: hidden;
     }
-    browser, textarea {
+    bt, #code {
       width: 49%;
       margin: 0 auto;
       display: inline-block;
       height: 500px;
       margin-left: 100px;
     }
-    button {
+    .run {
       display: block;
     }
-    button {
+    .run {
       font-weight: 700;
-      color: white;
+      color: #E7DB74;
       text-decoration: none;
       padding: .8em 1em calc(.8em + 3px);
       border-radius: 3px;
-      background: rgb(64,199,129);
-      box-shadow: 0 -3px rgb(53,167,110) inset;
+      background: #42433E;
+      box-shadow: 0 -3px #42433E inset;
       transition: 0.2s;
     } 
-    button:hover { background: rgb(53, 167, 110); }
-    button:active {
-      background: rgb(33,147,90);
-      box-shadow: 0 3px rgb(33,147,90) inset;
+    .run:hover { background: #282923; }
+    .run:active {
+      background: #282923;
+      box-shadow: 0 3px #282923 inset;
     }
-    browser {
+    bt {
       background-color: white;
       position: absolute;
       margin-left: 10px;
+      overflow: auto;
+    }
+    .start {text-align: center;margin-top: 10%}
+    .menu {font-size: 30px;background: #42433E;color: white;}
+    .btest {margin-left: 10px;cursor: pointer;}
+    mtxt {
+      display: block;
+      margin-left: 20px;
+      font-size: 15px; 
+      padding: 5px;
+      background: white;
+      color: black;
+      border: 2px solid #42433E;
+      width: 50%;
+      margin-top: -32px;
+      margin-left: 70px;
+    }
+    .loc {
+      margin-top: -10px;
     }
   </style>
   <body>
     <button class="run" id="run" onclick="runing()">ЗАПУСК</button>
-    <button onclick="download()" style="position: fixed;top: 5px;right: 5px;">СКАЧАТЬ</button>
-    <textarea id="code" name="code" class="longread">
+    <button onclick="download()" style="position: fixed;top: 5px;right: 5px;" class="run">СКАЧАТЬ</button>
+    <textarea id="code" name="code">
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -57,12 +76,23 @@
 <style></style>
 </head>
 <body>
-  <h1>Новый редактор</h1>
+  <h1>Заголовок</h1>
+  <p>Параграф</p>
 </body>
 </html></textarea>
-  <browser id="play">
-    <h2 style="text-align: center;">Запустите код</h2>
-  </browser>
+  <bt>
+    <div class="menu">
+      <b class="btest"><</b>
+      <b class="btest">></b>
+      <mtxt><b class="loc">localhost:1500</b></mtxt>
+    </div>
+    <browser id="play">
+      <div class="start">
+        <img src="img/icon.png" style="width: 50%;">
+        <h2>Запустите код</h2>
+      </div>
+    </browser>
+  </bt>
   <script>
     CodeMirror.fromTextArea(document.getElementById('code'), { mode: 'xml', lineNumbers: false })
     var code = document.querySelector(".CodeMirror-code");
@@ -86,8 +116,13 @@
       document.body.appendChild(anchor)
       anchor.click()
       document.body.removeChild(anchor)
-      alert("Код скачивается...")
+      alert("Всеволод html")
     }
+    document.addEventListener('keydown', function(event) {
+      if (event.code == 'KeyS' && (event.ctrlKey || event.metaKey)) {
+        download();
+      } else (event.code == 'KeyP' && (event.ctrlKey || event.metaKey))
+    });
   </script>
   <style>.CodeMirror, .cm-s-default {width: 49%;display: inline-block;height: 500px;}</style>
   </body>
