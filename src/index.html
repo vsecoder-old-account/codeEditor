@@ -3,14 +3,78 @@
   <head>
     <meta charset="utf-8">
     <title>Редактор</title>
-    <link rel="icon" href="../img/icon.png">
+    <link rel="icon" href="https://raw.githubusercontent.com/htmlcssphpjs/image/main/icon.ico">
     <link rel="stylesheet" href="dist/codemirror.css">
     <script src="dist/codemirror.js"></script>
     <script src="dist/xml.js"></script>
   </head>
+  <body class="body1">
+    <button class="run" id="run" onclick="runing()" style="margin-bottom: 2px;margin-top: -2px;margin-left: -4px;">ЗАПУСК</button>
+    <button onclick="download()" style="position: fixed;top: 5px;right: 5px;" class="run">СКАЧАТЬ</button>
+    <textarea id="code" name="code">
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Документ</title>
+<style></style>
+</head>
+<body>
+  <h1>Заголовок</h1>
+  <p>Параграф</p>
+</body>
+</html></textarea>
+  <bt>
+    <div class="menu">
+      <b class="btest"><</b>
+      <b class="btest">></b>
+      <mtxt><b class="loc">localhost:1500</b></mtxt>
+      <img src="img/reload.png" class="reload123" onclick="runing()">
+    </div>
+    <browser id="play">
+      <div class="start">
+        <img src="img/icon.png" style="width: 50%;">
+        <h2>Запустите код</h2>
+      </div>
+    </browser>
+  </bt>
+  <script>
+    var editor = CodeMirror.fromTextArea(document.getElementById('code'), { mode: 'xml', lineNumbers: false })
+    var code = document.querySelector(".CodeMirror-code");
+    var run = document.getElementById("run");
+    var play = document.getElementById("play");
+    var coding = code.innerText;
+    console.log("Ctrl + P -- запустить код;\nCtrl + S -- скачать html файл;");
+    function runing () {
+      coding = editor.getValue();
+      document.getElementById('play').innerHTML = coding;
+    }
+    const download = () => {
+      let text = editor.getValue() + "\n<!--//vsevolodhtml-->"
+      let blob = new Blob([text], {
+        type: 'text/plain'
+      })
+      let anchor = document.createElement('a')
+      anchor.download = 'project.html'
+      anchor.href = window.URL.createObjectURL(blob)
+      anchor.target = '_blank'
+      anchor.style.display = 'none'
+      document.body.appendChild(anchor)
+      anchor.click()
+      document.body.removeChild(anchor)
+      alert("Всеволод html")
+    }
+    document.addEventListener('keydown', function(event) {
+      if (event.code == 'KeyS' && (event.ctrlKey || event.metaKey)) {
+        download();
+      } else if (event.code == 'KeyP' && (event.ctrlKey || event.metaKey)) {
+        runing();
+      }
+    });
+  </script>
   <style>
     * {box-sizing: border-box;}
-    body {
+    .body1 {
       background: #282923;
       overflow: hidden;
     }
@@ -77,70 +141,6 @@
       transform: rotate(-360deg);
     }
   </style>
-  <body>
-    <button class="run" id="run" onclick="runing()" style="margin-bottom: 2px;margin-top: -2px;margin-left: -4px;">ЗАПУСК</button>
-    <button onclick="download()" style="position: fixed;top: 5px;right: 5px;" class="run">СКАЧАТЬ</button>
-    <textarea id="code" name="code">
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-<meta charset="UTF-8">
-<title>Документ</title>
-<style></style>
-</head>
-<body>
-  <h1>Заголовок</h1>
-  <p>Параграф</p>
-</body>
-</html></textarea>
-  <bt>
-    <div class="menu">
-      <b class="btest"><</b>
-      <b class="btest">></b>
-      <mtxt><b class="loc">localhost:1500</b></mtxt>
-      <img src="img/reload.png" class="reload123" onclick="runing()">
-    </div>
-    <browser id="play">
-      <div class="start">
-        <img src="img/icon.png" style="width: 50%;">
-        <h2>Запустите код</h2>
-      </div>
-    </browser>
-  </bt>
-  <script>
-    CodeMirror.fromTextArea(document.getElementById('code'), { mode: 'xml', lineNumbers: false })
-    var code = document.querySelector(".CodeMirror-code");
-    var run = document.getElementById("run");
-    var play = document.getElementById("play");
-    var coding = code.innerText;
-    console.log("Ctrl + P -- запустить код;\nCtrl + S -- скачать html файл;");
-    function runing () {
-      coding = code.innerText;
-      document.getElementById('play').innerHTML = coding;
-    }
-    const download = () => {
-      let text = document.querySelector(".CodeMirror-code").innerText + "\n<!--//vsevolodhtml-->"
-      let blob = new Blob([text], {
-        type: 'text/plain'
-      })
-      let anchor = document.createElement('a')
-      anchor.download = 'project.html'
-      anchor.href = window.URL.createObjectURL(blob)
-      anchor.target = '_blank'
-      anchor.style.display = 'none'
-      document.body.appendChild(anchor)
-      anchor.click()
-      document.body.removeChild(anchor)
-      alert("Всеволод html")
-    }
-    document.addEventListener('keydown', function(event) {
-      if (event.code == 'KeyS' && (event.ctrlKey || event.metaKey)) {
-        download();
-      } else if (event.code == 'KeyP' && (event.ctrlKey || event.metaKey)) {
-        runing();
-      }
-    });
-  </script>
   <style>.CodeMirror, .cm-s-default {width: 49%;display: inline-block;height: 500px;}</style>
   </body>
 </html>
