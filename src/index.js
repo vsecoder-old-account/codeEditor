@@ -6,11 +6,15 @@ if (require('electron-squirrel-startup')) {
 
 let mainWindow;
 
+if (require('electron-squirrel-startup')) {
+  app.quit();
+}
+
 const createWindow = () => {
   mainWindow = new BrowserWindow({
     width: 1000,
     height: 600,
-    icon: __dirname + '/img/logo.png'
+    icon: __dirname + '/src/img/icon.ico',
   });
   mainWindow.loadURL(`file://${__dirname}/index.html`);
 
